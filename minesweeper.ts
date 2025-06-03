@@ -8,7 +8,7 @@ export function minesweeper(input : string): string{ //Fonction de résolution d
            let count = 0;
            if(arr[i + 1] === "*") count++; // On verifie la case de droite
            if(arr[i - 1] === "*") count++; // On verifie la case de gauche
-           return count.toString(); // Ca retourne le nombre de mine autours des cases
+           return count.toString(); // Ca retourne le nombre de mines autours des cases
         }).join("");
     }
 

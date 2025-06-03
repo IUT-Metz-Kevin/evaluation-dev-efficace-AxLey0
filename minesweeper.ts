@@ -51,3 +51,9 @@ Deno.test("Grille 2x2 avec 1 mine", () => {
     const expected ="1*\n11";
     assertEquals(minesweeper(input),expected);
 });
+
+Deno.test("Grille 3x3 avec 1 mine au centre", () => {
+    const input = "...\n.*.\n...";
+    const expected ="111\n1*1\n111";
+    assertEquals(minesweeper(input),expected);
+});

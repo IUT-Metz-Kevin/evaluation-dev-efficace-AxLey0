@@ -6,6 +6,7 @@ export function minesweeper(input : string): string{
            if(c === "*") return "*";
            let count = 0;
            if(arr[i + 1] === "*") count++;
+           if(arr[i - 1] === "*") count++;
            return count.toString();
         }).join("");
     }

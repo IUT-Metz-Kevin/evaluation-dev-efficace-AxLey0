@@ -1,6 +1,7 @@
 import { assertEquals } from "jsr:@std/assert";
 
 export function minesweeper(input : string): string{
+
     if (!input.includes("\n")){
         return input.split("").map((c, i, arr) => {
            if(c === "*") return "*";
@@ -10,7 +11,17 @@ export function minesweeper(input : string): string{
            return count.toString();
         }).join("");
     }
-    return "";
+    const rows = input.split("\n").map((r) => r.split(""));
+    const height = rows.length;
+    const width = rows[0].length;
+    let result = "";
+
+    for(let y = 0; y < height; y++){
+        for(let x = 0; x < width; x++){
+            result += rows[y][x];
+        }
+    }
+    return result;
 }
 
 Deno.test("Grille 1x1", () => {

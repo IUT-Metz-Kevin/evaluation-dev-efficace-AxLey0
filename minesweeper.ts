@@ -29,19 +29,9 @@ export function minesweeper(input : string): string{
         }
         return count;
     }
-    let result = "";
-    for(let y = 0; y < height; y++){
-        for(let x = 0; x < width; x++){
-            const cell = rows[y][x];
-            if(cell === "*"){
-                result += "*"
-            }else{
-                result += countMines(x,y).toString();
-            }
-        }
-        if (y < height - 1) result += "\n"
-    }
-    return result;
+    return rows.map((row,y) =>
+        row.map((cell, x) => (cell === "*" ? "*" : countMines(x, y).toString())).join("")
+    ).join("\n");
 }
 
 Deno.test("Grille 1x1", () => {

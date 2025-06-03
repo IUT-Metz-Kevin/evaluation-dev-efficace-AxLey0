@@ -24,3 +24,9 @@ Deno.test("Grille 1x1 avec mine", () => {
 Deno.test("Ligne simple", () => {
     assertEquals(minesweeper(".*."),"1*1");
 });
+
+Deno.test("Grille 2x2 avec 1 mine", () => {
+    const input = ".*\n..";
+    const expected ="1*\n11";
+    assertEquals(minesweeper(input),expected);
+});

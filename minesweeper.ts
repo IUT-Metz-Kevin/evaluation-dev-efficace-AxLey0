@@ -1,36 +1,41 @@
 import { assertEquals } from "jsr:@std/assert";
 
-export function minesweeper(input : string): string{
+export function minesweeper(input : string): string{ //Fonction de résolution du démineur
 
     if (!input.includes("\n")){
         return input.split("").map((c, i, arr) => {
-           if(c === "*") return "*";
+           if(c === "*") return "*"; // Si la case est une mine on revoie la meme chose
            let count = 0;
-           if(arr[i + 1] === "*") count++;
-           if(arr[i - 1] === "*") count++;
-           return count.toString();
+           if(arr[i + 1] === "*") count++; // On verifie la case de droite
+           if(arr[i - 1] === "*") count++; // On verifie la case de gauche
+           return count.toString(); // Ca retourne le nombre de mine autours des cases
         }).join("");
     }
+
+    // Je part du principe qu'il est plus simple de découper la grille en tableau
     const rows = input.split("\n").map((r) => r.split(""));
     const height = rows.length;
     const width = rows[0].length;
 
+    // Cette fonction permet d'incrementer le nombre en fonction de la position de la mine
     function countMines(x: number, y: number): number{
         let count = 0;
+        // Je parcours les 8 cases autour de la mine
         for(let dy = -1; dy <= 1; dy++){
             for(let dx = -1; dx <=1; dx++){
+                // J'ignore la case ou ce situe la mine
                 if(dx === 0 && dy === 0)continue;
-                    const ny = y + dy;
-                    const nx = x + dx;
-                    if(ny >= 0 && ny < height && nx >= 0 && nx < width){
-                    if (rows[ny][nx] === "*")count++;
+                    const ny = y + dy;  // Nouvelle ligne
+                    const nx = x + dx;  // Nouvelle colonne
+                    if(ny >= 0 && ny < height && nx >= 0 && nx < width){ // Je verifie si la case et bien dans les bornes
+                    if (rows[ny][nx] === "*")count++; // Si on trouve la mine, on incremente
                 }
             }
         }
         return count;
     }
     return rows.map((row,y) =>
-        row.map((cell, x) => (cell === "*" ? "*" : countMines(x, y).toString())).join("")
+        row.map((cell, x) => (cell === "*" ? "*" : countMines(x, y).toString())).join("") // on reconctruit le resultat final pour retrouver son format initial
     ).join("\n");
 }
 

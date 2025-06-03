@@ -14,26 +14,29 @@ export function minesweeper(input : string): string{
     const rows = input.split("\n").map((r) => r.split(""));
     const height = rows.length;
     const width = rows[0].length;
-    let result = "";
 
+    function countMines(x: number, y: number): number{
+        let count = 0;
+        for(let dy = -1; dy <= 1; dy++){
+            for(let dx = -1; dx <=1; dx++){
+                if(dx === 0 && dy === 0)continue;
+                    const ny = y + dy;
+                    const nx = x + dx;
+                    if(ny >= 0 && ny < height && nx >= 0 && nx < width){
+                    if (rows[ny][nx] === "*")count++;
+                }
+            }
+        }
+        return count;
+    }
+    let result = "";
     for(let y = 0; y < height; y++){
         for(let x = 0; x < width; x++){
             const cell = rows[y][x];
             if(cell === "*"){
                 result += "*"
             }else{
-                let count = 0;
-                for(let dy = -1; dy <= 1; dy++){
-                    for(let dx = -1; dx <=1; dx++){
-                        if(dx === 0 && dy === 0)continue;
-                        const ny = y + dy;
-                        const nx = x + dx;
-                        if(ny >= 0 && ny < height && nx >= 0 && nx < width){
-                            if (rows[ny][nx] === "*")count++;
-                        }
-                    }
-                }
-                result += count.toString()
+                result += countMines(x,y).toString();
             }
         }
         if (y < height - 1) result += "\n"

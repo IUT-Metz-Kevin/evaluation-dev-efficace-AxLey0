@@ -1,7 +1,12 @@
 import { assertEquals } from "jsr:@std/assert";
 
 export function minesweeper(input : string): string{
-    return input === "*" ? "*" : "0";
+    if (!input.includes("\n")){
+        return input.split("").map((c) => {
+           c === "*" ? "*" : "0" 
+        }).join("");
+    }
+    return "";
 }
 
 Deno.test("Grille 1x1", () => {

@@ -82,4 +82,8 @@ Deno.test("Grille 4x3 avec 2 mines", () => {
     assertEquals(minesweeper(input),expected);
 });
 
-
+Deno.test("Grille 5x3 avec 4 mines", () => {
+    const input = "..*.*\n*....\n...*.";
+    const expected ="12*2*\n*2232\n111*1";
+    assertEquals(minesweeper(input),expected);
+});

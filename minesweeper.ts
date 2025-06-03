@@ -2,8 +2,11 @@ import { assertEquals } from "jsr:@std/assert";
 
 export function minesweeper(input : string): string{
     if (!input.includes("\n")){
-        return input.split("").map((c) => {
-           c === "*" ? "*" : "0" 
+        return input.split("").map((c, i, arr) => {
+           if(c === "*") return "*";
+           let count = 0;
+           if(arr[i + 1] === "*") count++;
+           return count.toString();
         }).join("");
     }
     return "";

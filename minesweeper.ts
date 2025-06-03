@@ -18,8 +18,14 @@ export function minesweeper(input : string): string{
 
     for(let y = 0; y < height; y++){
         for(let x = 0; x < width; x++){
-            result += rows[y][x];
+            const cell = rows[y][x];
+            if(cell === "*"){
+                result += "*"
+            }else{
+                result += "0";
+            }
         }
+        if (y < height - 1) result += "\n"
     }
     return result;
 }

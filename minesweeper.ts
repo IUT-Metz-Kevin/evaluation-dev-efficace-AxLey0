@@ -22,7 +22,18 @@ export function minesweeper(input : string): string{
             if(cell === "*"){
                 result += "*"
             }else{
-                result += "0";
+                let count = 0;
+                for(let dy = -1; dy <= 1; dy++){
+                    for(let dx = -1; dx <=1; dx++){
+                        if(dx === 0 && dy === 0)continue;
+                        const ny = y + dy;
+                        const nx = x + dx;
+                        if(ny >= 0 && ny < height && nx >= 0 && nx < width){
+                            if (rows[ny][nx] === "*")count++;
+                        }
+                    }
+                }
+                result += count.toString()
             }
         }
         if (y < height - 1) result += "\n"
